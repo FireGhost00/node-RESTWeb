@@ -28,7 +28,15 @@ export class TodosController {
 
 public createTodo=(req:Request, res:Response) => {
 
-res.json({ message: 'Create todo' });
+const { text } = req.body;
+if (!text) {
+    res.status(400).json({ message: 'Invalid text' });
+    return;
+}
+const newTodo = { id: todos.length + 1, text, createdAt: null };
+todos.push(newTodo);
+
+res.json(newTodo);
 
 }
 }
