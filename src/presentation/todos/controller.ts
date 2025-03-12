@@ -52,12 +52,15 @@ public updateTodo=(req:Request, res:Response) => {
         res.status(404).json({ message: 'Todo not found' });
         return;
     }
-    const { text } = req.body;
+    const { text,createdAt } = req.body;
     if (!text) {
         res.status(400).json({ message: 'Invalid text' });
         return;
     }
-    todo.text = text;
+
+
+    todo.text = text || todo.text;
+    (createdAt==='null')? todo.createdAt=null : todo.createdAt=new Date( createdAt || todo.createdAt );
     res.json(todo);
 
 }
