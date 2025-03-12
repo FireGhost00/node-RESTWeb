@@ -28,6 +28,8 @@ export class Server {
     
 
     //* Middlewares
+    this.app.use( express.json() );
+    this.app.use( express.urlencoded({ extended: true }) );//* Parse URL-encoded bodies
 
     //* Public Folder
     this.app.use( express.static( this.publicPath ) );

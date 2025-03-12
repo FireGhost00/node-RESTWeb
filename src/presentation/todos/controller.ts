@@ -25,6 +25,12 @@ export class TodosController {
         (todo) ? res.json(todo) : res.status(404).json({ message: 'Todo not found' });
 
 }
+
+public createTodo=(req:Request, res:Response) => {
+
+res.json({ message: 'Create todo' });
+
+}
 }
 
 
