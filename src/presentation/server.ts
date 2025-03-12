@@ -16,10 +16,10 @@ export class Server {
   private readonly routes: Router;
 
   constructor(options: Options) {
-    const { port, public_path = 'public' } = options;
+    const { port,routes, public_path = 'public' } = options;
     this.port = port;
     this.publicPath = public_path;
-    this.routes = options.routes;
+    this.routes = routes;
   }
 
   
@@ -33,7 +33,11 @@ export class Server {
     this.app.use( express.static( this.publicPath ) );
 
     //* Routes
-    this.app.use( this.routes ); 
+    this.app.use(this.routes);
+    
+
+
+
 
     this.app.get('*', (req, res) => {
       const indexPath = path.join( __dirname + `../../../${ this.publicPath }/index.html` );
