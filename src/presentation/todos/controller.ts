@@ -39,6 +39,29 @@ todos.push(newTodo);
 res.json(newTodo);
 
 }
+
+public updateTodo=(req:Request, res:Response) => {
+ 
+    const id = +req.params.id;
+    if (isNaN(id)) {
+        res.status(400).json({ message: 'Invalid id' });
+        return;
+    }
+    const todo = todos.find(todo => todo.id === id);
+    if (!todo) {
+        res.status(404).json({ message: 'Todo not found' });
+        return;
+    }
+    const { text } = req.body;
+    if (!text) {
+        res.status(400).json({ message: 'Invalid text' });
+        return;
+    }
+    todo.text = text;
+    res.json(todo);
+
+}
+
 }
 
 
