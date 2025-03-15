@@ -65,7 +65,21 @@ public updateTodo=(req:Request, res:Response) => {
 
 }
 
-}
+public deleteTodo=(req:Request, res:Response) => {
+    const id = +req.params.id;
+    if (isNaN(id)) {
+        res.status(400).json({ message: 'Invalid id' });
+        return;
+    }
+    const index = todos.findIndex(todo => todo.id === id);
+    if (index === -1) {
+        res.status(404).json({ message: 'Todo not found' });
+        return;
+    }
+    todos.splice(index, 1);
+    res.json({ message: 'Todo deleted',todos });
 
+}
+}
 
 
